@@ -14,18 +14,18 @@ def get_data():
     path = r'cars.csv'
     return pd.read_csv(path)
 
-df = pd.read_csv("./data/Summary.xlsx")
+df = pd.read_csv("./data/Summary.csv")
 
 df
 
-makes = df['make'].drop_duplicates()
-years = df['year']
-models = df['model']
-engines = df['engine']
+wlco = df['WL Co'].drop_duplicates()
+area = df['Area'].drop_duplicates()
+country = df['Country'].drop_duplicates()
+categories = df['Category 1'].drop_duplicates
 components = df['components']
-make_choice = st.sidebar.selectbox('Select your vehicle:', makes)
-year_choice = st.sidebar.selectbox('', years)
-model_choice = st.sidebar.selectbox('', models)
-engine_choice = st.sidebar.selectbox('', engines)
+wlco_choice = st.sidebar.selectbox('Wl Co:', wlco)
+area_choice = st.sidebar.selectbox('', area)
+country_choice = st.sidebar.selectbox('', country)
+categories_choice = st.sidebar.selectbox('', categories)
 
 st.write('Results:', components)
