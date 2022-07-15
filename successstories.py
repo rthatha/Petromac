@@ -23,7 +23,7 @@ area = df['Area'].drop_duplicates()
 country = df['Country'].drop_duplicates()
 categories = df['Category 1'].drop_duplicates
 wlco_choice = st.sidebar.selectbox('Wl Co:', wlco)
-area_choice = st.sidebar.selectbox('', area)
-country_choice = st.sidebar.selectbox('', country)
+area_choice = st.sidebar.selectbox('Area:', area)
+country_choice = st.sidebar.selectbox('Country:', country)
 categories_choice = st.sidebar.selectbox('', categories)
 
