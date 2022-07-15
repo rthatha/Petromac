@@ -14,7 +14,7 @@ def get_data():
     path = r'cars.csv'
     return pd.read_csv(path)
 
-df = pd.read_csv("./data/Summary.csv")
+df = pd.read_csv("./data/Summary.xlsx")
 
 df
 
