@@ -58,7 +58,7 @@ categories = df['Category 1'].drop_duplicates()
 
 
 """
-import rendermap
+import rendermap from rendermap
 rendermap()
 
 
