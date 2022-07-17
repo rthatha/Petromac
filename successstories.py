@@ -4,17 +4,17 @@ import math
 import pandas as pd
 import streamlit as st
 import numpy as np
-import PyPDF2
 
-from PyPDF2 import PdfFileReader, PdfFileWriter
 
 @st.cache
 def get_data():
     df_casestudies = pd.read_csv("./data/Summary.csv")
-    return df_casestudies
+    df_jobhistory = pd.read_csv("./data/jobhistory.csv")
+    return df_casestudies,df_jobhistory
 
 
-df_casestudies = get_data()
+df_casestudies,df_jobhistory = get_data()
+
 df_casestudies
 
 
