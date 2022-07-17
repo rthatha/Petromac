@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 
-
+from PyPDF2 import PdfFileReader, PdfFileWriter
 
 @st.cache
 def get_data():
