@@ -26,20 +26,28 @@ categories = df_casestudies['Category 1'].drop_duplicates()
 
 
 wlco_choice = st.sidebar.selectbox('Wl Co:', wlcos)
+area_choice = st.sidebar.selectbox('Area:', areas)
+country_choice = st.sidebar.selectbox('Country:', countries)
+categories_choice = st.sidebar.selectbox('Categories:', categories)
+
+
+if st.button('Filter'):
+     df[(df['WL Co'] == wlco_choice) & (df['Area'] == area_choice) & (df['Country'] == country_choice) & (df['Category 1'] == categories_choice)]
+
 
 """
 area = df["Area"].loc[df['WL Co'] == wlco_choice].drop_duplicates()
-area_choice = st.sidebar.selectbox('Area:', area)
+
 
 country = df['Country'].loc[df['WL Co'] == wlco_choice].loc[df['Area'] == area_choice].drop_duplicates()
-country_choice = st.sidebar.selectbox('Country:', country)
+
 
 
 categories = df['Category 1'].drop_duplicates()
 
-categories_choice = st.sidebar.selectbox('Categories:', categories)
 
-df[(df['WL Co'] == wlco_choice) & (df['Area'] == area_choice) & (df['Country'] == country_choice) & (df['Category 1'] == categories_choice)]
+
+
 
 """
 
