@@ -22,15 +22,18 @@ wlco = df['WL Co'].drop_duplicates()
 wlco_choice = st.sidebar.selectbox('Wl Co:', wlco)
 
 
-area = df["Area"].loc[df['WL Co'] == wlco_choice]
+area = df["Area"].loc[df['WL Co'] == wlco_choice].drop_duplicates()
 area_choice = st.sidebar.selectbox('Area:', area)
 
 
-country = df['Country'].drop_duplicates()
+country = df['Country'].loc[df['Area'] == area_choice].drop_duplicates()
+country_choice = st.sidebar.selectbox('Country:', country)
+
+
 categories = df['Category 1'].drop_duplicates()
 
 
-country_choice = st.sidebar.selectbox('Country:', country)
+
 categories_choice = st.sidebar.selectbox('Categories:', categories)
 
 
