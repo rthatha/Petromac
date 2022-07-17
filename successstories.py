@@ -17,7 +17,7 @@ df_casestudies = get_data()
 df_casestudies
 
 
-wlcos = pd.DataFrame['All',df_casestudies['WL Co'].unique()]
+wlcos = df_casestudies['WL Co'].unique()
 wlcos
 areas = df_casestudies["Area"].drop_duplicates()
 countries = df_casestudies['Country'].drop_duplicates()
