@@ -22,7 +22,7 @@ wlco = df['WL Co'].drop_duplicates()
 wlco_choice = st.sidebar.selectbox('Wl Co:', wlco)
 
 
-area = df["Area"].loc[df["WL Co"] = wlco_choice]
+area = df["Area"].loc[df['WL Co'] == wlco_choice]
 area_choice = st.sidebar.selectbox('Area:', area)
 
 
