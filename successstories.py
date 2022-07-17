@@ -19,11 +19,18 @@ df = pd.read_csv("./data/Summary.csv")
 df
 
 wlco = df['WL Co'].drop_duplicates()
-area = df['Area'].drop_duplicates()
+wlco_choice = st.sidebar.selectbox('Wl Co:', wlco)
+
+
+area = df["Area"].loc[df["WL Co"] = wlco_choice]
+area_choice = st.sidebar.selectbox('Area:', area)
+
+
 country = df['Country'].drop_duplicates()
 categories = df['Category 1'].drop_duplicates()
-wlco_choice = st.sidebar.selectbox('Wl Co:', wlco)
-area_choice = st.sidebar.selectbox('Area:', area)
+
+
 country_choice = st.sidebar.selectbox('Country:', country)
 categories_choice = st.sidebar.selectbox('Categories:', categories)
+
 
