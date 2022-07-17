@@ -7,9 +7,6 @@ import numpy as np
 
 
 
-
-
-
 @st.cache
 def get_data():
     df_casestudies = pd.read_csv("./data/Summary.csv")
@@ -38,12 +35,13 @@ categories_choices
 
 if st.sidebar.button('Filter'):
      df = df_casestudies
-     df[(df['WL Co'] == wlco_choice) & (df['Area'] == area_choice) & (df['Country'] == country_choice) & (df['Category 1'] == categories_choice)]
+     
+     df[(df['WL Co'] == wlco_choices) & (df['Area'] == area_choices) & (df['Country'] == country_choices) & (df['Category 1'] == categories_choices)]
 
 
 """
-area = df["Area"].loc[df['WL Co'] == wlco_choice].drop_duplicates()
 
+areas = df["Area"].loc[df['WL Co'] == wlco_choices].drop_duplicates()
 
 country = df['Country'].loc[df['WL Co'] == wlco_choice].loc[df['Area'] == area_choice].drop_duplicates()
 
