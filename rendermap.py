@@ -1,8 +1,8 @@
 
 def rendermap():
     df = pd.DataFrame(
-    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-    columns=['lat', 'lon'])
+        np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+        columns=['lat', 'lon'])
 
     map = st.pydeck_chart(pdk.Deck(
         map_style='mapbox://styles/mapbox/light-v9',
