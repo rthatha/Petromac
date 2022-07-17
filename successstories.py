@@ -5,9 +5,9 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 
-"""
 
-"""
+
+
 
 
 @st.cache
@@ -25,10 +25,9 @@ countries = df_casestudies['Country'].drop_duplicates()
 categories = df_casestudies['Category 1'].drop_duplicates()
 
 
-
 wlco_choice = st.sidebar.selectbox('Wl Co:', (wlcos,'All'),on_change = None)
 
-
+"""
 area = df["Area"].loc[df['WL Co'] == wlco_choice].drop_duplicates()
 area_choice = st.sidebar.selectbox('Area:', area)
 
@@ -41,6 +40,10 @@ categories = df['Category 1'].drop_duplicates()
 categories_choice = st.sidebar.selectbox('Categories:', categories)
 
 df[(df['WL Co'] == wlco_choice) & (df['Area'] == area_choice) & (df['Country'] == country_choice) & (df['Category 1'] == categories_choice)]
+
+
+
+"""
 
 chart_data = pd.DataFrame(
      np.random.randn(20, 3),
