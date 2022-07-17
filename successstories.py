@@ -59,10 +59,6 @@ categories = df['Category 1'].drop_duplicates()
 
 """
 
-
-
-
-
 data = pd.DataFrame({
     'awesome cities' : ['Chicago', 'Minneapolis', 'Louisville', 'Topeka'],
     'lat' : [41.868171, 44.979840,  38.257972, 39.030575],
@@ -72,7 +68,7 @@ data = pd.DataFrame({
 # Adding code so we can have map default to the center of the data
 midpoint = (np.average(data['lat']), np.average(data['lon']))
 
-st.deck_gl_chart(
+st.map(
             viewport={
                 'latitude': midpoint[0],
                 'longitude':  midpoint[1],
