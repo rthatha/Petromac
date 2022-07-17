@@ -18,6 +18,7 @@ df_casestudies
 
 
 wlcos = df_casestudies['WL Co'].unique()
+type(wlcos)
 wlcos
 areas = df_casestudies["Area"].drop_duplicates()
 countries = df_casestudies['Country'].drop_duplicates()
