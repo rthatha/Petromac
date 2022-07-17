@@ -17,6 +17,7 @@ def get_data():
 df = pd.read_csv("./data/Summary.csv")
 
 st.write(df)
+st.dataframe(df)
 
 wlco = df['WL Co'].drop_duplicates()
 wlco_choice = st.sidebar.selectbox('Wl Co:', wlco)
