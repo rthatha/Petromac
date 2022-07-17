@@ -25,7 +25,7 @@ countries = df_casestudies['Country'].drop_duplicates()
 categories = df_casestudies['Category 1'].drop_duplicates()
 
 
-wlco_choice = st.sidebar.selectbox('Wl Co:', (wlcos,'All'))
+wlco_choice = st.sidebar.selectbox('Wl Co:', wlcos)
 
 """
 area = df["Area"].loc[df['WL Co'] == wlco_choice].drop_duplicates()
@@ -40,8 +40,6 @@ categories = df['Category 1'].drop_duplicates()
 categories_choice = st.sidebar.selectbox('Categories:', categories)
 
 df[(df['WL Co'] == wlco_choice) & (df['Area'] == area_choice) & (df['Country'] == country_choice) & (df['Category 1'] == categories_choice)]
-
-
 
 """
 
