@@ -4,6 +4,7 @@ import math
 import pandas as pd
 import streamlit as st
 import numpy as np
+import PyPDF2
 
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
