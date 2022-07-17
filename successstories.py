@@ -30,6 +30,11 @@ area_choice = st.sidebar.selectbox('Area:', areas)
 country_choice = st.sidebar.selectbox('Country:', countries)
 categories_choice = st.sidebar.selectbox('Categories:', categories)
 
+wlco_choice
+area_choice
+country_choice
+categories_choice
+
 
 if st.sidebar.button('Filter'):
      df = df_casestudies
