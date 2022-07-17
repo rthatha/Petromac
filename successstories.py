@@ -58,9 +58,8 @@ categories = df['Category 1'].drop_duplicates()
 
 
 """
-import rendermap from rendermap
+from rendermap import rendermap
 rendermap()
-
 
 map_data = pd.read_csv("./data/countries1.csv")
 map_data
