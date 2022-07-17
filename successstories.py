@@ -69,6 +69,7 @@ map_data = pd.DataFrame(
     np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
     columns=['lat', 'lon'])
 map_data = pd.read_csv("./data/countries1.csv")
+map_data
 st.map(map_data)
 
 if st.checkbox('Show dataframe'):
