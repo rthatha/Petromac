@@ -27,9 +27,9 @@ area = df["Area"].loc[df['WL Co'] == wlco_choice].drop_duplicates()
 area_choice = st.sidebar.selectbox('Area:', area)
 df[df['Area'] == area_choice]
 
-country = df['Country'].loc[df['Area'] == area_choice].drop_duplicates()
+country = df['Country'].loc[df['WL Co'] == wlco_choice].loc[df['Area'] == area_choice].drop_duplicates()
 country_choice = st.sidebar.selectbox('Country:', country)
-
+df[df['Country'] == country_choice]
 
 categories = df['Category 1'].drop_duplicates()
 
