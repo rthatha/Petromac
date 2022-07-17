@@ -31,7 +31,7 @@ country_choice = st.sidebar.selectbox('Country:', countries)
 categories_choice = st.sidebar.selectbox('Categories:', categories)
 
 
-if st.button('Filter'):
+if st.sidebar.button('Filter'):
      df = df_casestudies
      df[(df['WL Co'] == wlco_choice) & (df['Area'] == area_choice) & (df['Country'] == country_choice) & (df['Category 1'] == categories_choice)]
 
