@@ -25,15 +25,15 @@ countries = df_casestudies['Country'].drop_duplicates()
 categories = df_casestudies['Category 1'].drop_duplicates()
 
 
-wlco_choice = st.sidebar.selectbox('Wl Co:', wlcos)
-area_choice = st.sidebar.selectbox('Area:', areas)
-country_choice = st.sidebar.selectbox('Country:', countries)
-categories_choice = st.sidebar.selectbox('Categories:', categories)
+wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
+area_choices = st.sidebar.multiselect('Area:', areas)
+country_choices = st.sidebar.multiselect('Country:', countries)
+categories_choices = st.sidebar.multiselect('Categories:', categories)
 
-wlco_choice
-area_choice
-country_choice
-categories_choice
+wlco_choices
+area_choices
+country_choices
+categories_choices
 
 
 if st.sidebar.button('Filter'):
