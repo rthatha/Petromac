@@ -4,6 +4,7 @@ import math
 import pandas as pd
 import streamlit as st
 import numpy as np
+
 from pathlib import Path
 import PyPDF2
 from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
@@ -67,3 +68,21 @@ if st.sidebar.button('Filter'):
 
     st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime='application/pdf')
     
+    data = df_jobhistory.loc[country_choices]
+        #data /= 1000000.0
+        st.write("Number of Descents", data.sort_index())
+
+        data = data.T.reset_index()
+        data = pd.melt(data, id_vars=["index"]).rename(
+            columns={"index": "Date", "value": "Successful"}
+        )
+        chart = (
+            alt.Chart(data)
+            .mark_area(opacity=0.3)
+            .encode(
+                x="Date:T",
+                y=alt.Y("Successful:Q", stack=None),
+                color="Country:N",
+            )
+        )
+        st.altair_chart(chart, use_container_width=True)
