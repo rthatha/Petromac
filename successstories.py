@@ -19,21 +19,15 @@ df_casestudies
 
 
 wlcos = df_casestudies['WL Co'].unique()
-st.write(type(wlcos))
-wlcos
-
-
 wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
 
-areas = df_casestudies["Area"].loc[df['WL Co'] == wlco_choices].unique()
-
-countries = df_casestudies['Country'].drop_duplicates()
-categories = df_casestudies['Category 1'].drop_duplicates()
-
-
-
+areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
 area_choices = st.sidebar.multiselect('Area:', areas)
+
+countries = df_casestudies['Country'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].unique()
 country_choices = st.sidebar.multiselect('Country:', countries)
+
+categories = df_casestudies['Category 1'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)].unique()
 categories_choices = st.sidebar.multiselect('Categories:', categories)
 
 wlco_choices
@@ -42,22 +36,13 @@ country_choices
 categories_choices
 
 
+
 if st.sidebar.button('Filter'):
-     df = df_casestudies
-     
-     df[(df['WL Co'] == wlco_choices) & (df['Area'] == area_choices) & (df['Country'] == country_choices) & (df['Category 1'] == categories_choices)]
+          
+     df_casestudies.loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)]
 
 
 """
-
-
-
-country = df['Country'].loc[df['WL Co'] == wlco_choice].loc[df['Area'] == area_choice].drop_duplicates()
-
-
-
-categories = df['Category 1'].drop_duplicates()
-
 
 
 
