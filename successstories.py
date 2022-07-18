@@ -14,7 +14,7 @@ from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 def get_data():
     df_casestudies = pd.read_csv("./data/Summary.csv")
     df_jobhistory = pd.read_csv("./data/jobhistory.csv")
-    return df_casestudies,df_jobhistory
+    return df_casestudies,df_jobhistory.set_index("Country")
 
 
 df_casestudies,df_jobhistory = get_data()
@@ -70,19 +70,20 @@ if st.sidebar.button('Filter'):
     
     data = df_jobhistory.loc[country_choices]
         #data /= 1000000.0
-        st.write("Number of Descents", data.sort_index())
+    st.write("Number of Descents", data.sort_index())
 
-        data = data.T.reset_index()
-        data = pd.melt(data, id_vars=["index"]).rename(
-            columns={"index": "Date", "value": "Successful"}
+    data = data.T.reset_index()
+    data = pd.melt(data, id_vars=["index"]).rename(
+        columns={"index": "Date", "value": "Successful"}
         )
-        chart = (
-            alt.Chart(data)
-            .mark_area(opacity=0.3)
-            .encode(
-                x="Date:T",
-                y=alt.Y("Successful:Q", stack=None),
-                color="Country:N",
+    
+    chart = (
+        alt.Chart(data)
+        .mark_area(opacity=0.3)
+        .encode(
+            x="Date:T",
+            y=alt.Y("Successful:Q", stack=None),
+            color="Country:N",
             )
-        )
-        st.altair_chart(chart, use_container_width=True)
+            )
+    st.altair_chart(chart, use_container_width=True)
