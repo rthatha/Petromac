@@ -60,10 +60,8 @@ if st.sidebar.button('Filter'):
     destination_folder.mkdir(exist_ok=True, parents=True)
     output_path = destination_folder / f"output_filtered_successstories.pdf"
 
-    with open(str(output_pdf_path), 'wb') as out:
+    with open(str(output_path), 'wb') as out:
         pdf_writer.write(out)
 
-    output_mime = 'application/pdf'
-
-    st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime=output_mime)
+    st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime='application/pdf')
     
