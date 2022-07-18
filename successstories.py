@@ -4,7 +4,7 @@ import math
 import pandas as pd
 import streamlit as st
 import numpy as np
-
+from pathlib import Path
 import PyPDF2
 from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 
@@ -53,10 +53,17 @@ if st.sidebar.button('Filter'):
     pdf_writer = PdfFileWriter()
     for page in pagenumbers:
         pdf_writer.addPage(successstories.getPage(page))
-    pdf_writer.write("./data/PDFTemplates/Filtered_Successstories.pdf")
 
 
+    # Make folder for storing user uploads
+    destination_folder = Path('downloads')
+    destination_folder.mkdir(exist_ok=True, parents=True)
+    output_pdf_path = destination_folder / f"output_filtered_successstories.pdf"
 
+    with open(str(output_pdf_path), 'wb') as out:
+        pdf_writer.write(out)
 
+    output_mime = 'application/pdf'
 
-
+    st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime=output_mime)
+    
