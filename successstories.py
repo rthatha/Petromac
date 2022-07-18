@@ -34,11 +34,6 @@ country_choices = st.sidebar.multiselect('Country:', countries)
 categories = df_casestudies['Category 1'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)].unique()
 categories_choices = st.sidebar.multiselect('Categories:', categories)
 
-wlco_choices
-area_choices
-country_choices
-categories_choices
-
 cover_page = PdfFileReader("./data/PDFTemplates/Coverpage.pdf")
 #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
 end_page = PdfFileReader("./data/PDFTemplates/Endpage.pdf")
@@ -48,7 +43,7 @@ if st.sidebar.button('Filter'):
     filtered_df = df_casestudies.loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)]
     filtered_df
     pagenumbers = filtered_df['Page']
-    pagenumbers
+    
 
     pdf_writer = PdfFileWriter()
 
