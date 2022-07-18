@@ -58,7 +58,7 @@ if st.sidebar.button('Filter'):
     # Make folder for storing user uploads
     destination_folder = Path('downloads')
     destination_folder.mkdir(exist_ok=True, parents=True)
-    output_pdf_path = destination_folder / f"output_filtered_successstories.pdf"
+    output_path = destination_folder / f"output_filtered_successstories.pdf"
 
     with open(str(output_pdf_path), 'wb') as out:
         pdf_writer.write(out)
