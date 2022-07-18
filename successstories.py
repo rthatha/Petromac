@@ -19,7 +19,7 @@ df_casestudies
 
 def filters():
     if wlco_choices==[]:
-        areas = [Middle East, North America, Latin America, Asia, Europe, Africa]
+        areas = ['Middle East', 'North America', 'Latin America', 'Asia', 'Europe', 'Africa']
     else:
         areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
     return areas
