@@ -17,12 +17,30 @@ df_casestudies,df_jobhistory = get_data()
 
 df_casestudies
 
+def filters():
+    if wlco_choices==[]:
+        areas = [Middle East, North America, Latin America, Asia, Europe, Africa]
+    else:
+        areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
+    return areas
+
+
+
+
+
+
+def wlco_choices_filter():
+    areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
+    return areas
+
+
+
 
 wlcos = df_casestudies['WL Co'].unique()
-wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
+wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos, on_change = filters())
 
-areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
-area_choices = st.sidebar.multiselect('Area:', areas)
+'areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
+area_choices = st.sidebar.multiselect('Area:', filters())
 
 countries = df_casestudies['Country'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].unique()
 country_choices = st.sidebar.multiselect('Country:', countries)
@@ -44,10 +62,12 @@ if st.sidebar.button('Filter'):
 
 """
 
-
+Filter works only downwards
 
 
 """
+
+
 from rendermap import rendermap
 rendermap()
 
