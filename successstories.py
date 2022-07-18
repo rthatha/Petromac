@@ -6,7 +6,7 @@ import streamlit as st
 import numpy as np
 
 import PyPDF2
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 
 
 @st.cache
@@ -49,6 +49,15 @@ if st.sidebar.button('Filter'):
      pagenumbers
 
 
+cover_page = PdfFileReader("./data/PDFTemplates/Coverpage.pdf")
+#jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
+end_page = PdfFileReader("./data/PDFTemplates/Endpage.pdf")
+successstories = PdfFileReader("./data/PDFTemplates/Successstories.pdf")
+
+pdf_writer = PdfFileWriter()
+for page in pagenumbers:
+    pdf_writer.addPage(successstories.getPage(page))
 
 
+pdf_writer.write("./data/PDFTemplates/Filtered_Successstories.pdf")
 
