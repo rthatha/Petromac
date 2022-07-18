@@ -17,17 +17,13 @@ df_casestudies,df_jobhistory = get_data()
 
 df_casestudies
 
-def area_filter(wlco_choices):
-    areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
-    area_choices = st.sidebar.multiselect('Area:', areas)
-    return
-
 
 
 wlcos = df_casestudies['WL Co'].unique()
 wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
-area_filter(wlco_choices)
 
+areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
+area_choices = st.sidebar.multiselect('Area:', areas)
 
 countries = df_casestudies['Country'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].unique()
 country_choices = st.sidebar.multiselect('Country:', countries)
