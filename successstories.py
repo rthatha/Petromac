@@ -39,25 +39,24 @@ area_choices
 country_choices
 categories_choices
 
-
-
-if st.sidebar.button('Filter'):
-          
-     filtered_df = df_casestudies.loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)]
-     filtered_df
-     pagenumbers = filtered_df['Page']
-     pagenumbers
-
-
 cover_page = PdfFileReader("./data/PDFTemplates/Coverpage.pdf")
 #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
 end_page = PdfFileReader("./data/PDFTemplates/Endpage.pdf")
 successstories = PdfFileReader("./data/PDFTemplates/Successstories.pdf")
 
-pdf_writer = PdfFileWriter()
-for page in pagenumbers:
-    pdf_writer.addPage(successstories.getPage(page))
+if st.sidebar.button('Filter'):
+    filtered_df = df_casestudies.loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)]
+    filtered_df
+    pagenumbers = filtered_df['Page']
+    pagenumbers
+
+    pdf_writer = PdfFileWriter()
+    for page in pagenumbers:
+        pdf_writer.addPage(successstories.getPage(page))
+    pdf_writer.write("./data/PDFTemplates/Filtered_Successstories.pdf")
 
 
-pdf_writer.write("./data/PDFTemplates/Filtered_Successstories.pdf")
+
+
+
 
