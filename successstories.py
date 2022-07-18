@@ -18,7 +18,7 @@ df_casestudies,df_jobhistory = get_data()
 df_casestudies
 
 
-wlcos = df_casestudies['WL Co'].unique()
+wlcos = df_casestudies['WL Co']
 st.write(type(wlcos))
 wlcos
 areas = df_casestudies["Area"].drop_duplicates()
