@@ -51,8 +51,15 @@ if st.sidebar.button('Filter'):
     pagenumbers
 
     pdf_writer = PdfFileWriter()
+
+    for page in range(cover_page.getNumPages()):
+            pdf_writer.addPage(cover_page.getPage(page))
+
     for page in pagenumbers:
-        pdf_writer.addPage(successstories.getPage(page))
+        pdf_writer.addPage(successstories.getPage(page-1))
+
+    for page in range(end_page.getNumPages()):
+            pdf_writer.addPage(end_page.getPage(page))
 
 
     # Make folder for storing user uploads
