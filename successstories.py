@@ -25,8 +25,8 @@ def area_filter(wlco_choices):
 
 
 wlcos = df_casestudies['WL Co'].unique()
-wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos, on_change = area_filter(wlco_choices))
-
+wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
+area_filter(wlco_choices)
 
 
 countries = df_casestudies['Country'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].unique()
