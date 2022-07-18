@@ -18,15 +18,20 @@ df_casestudies,df_jobhistory = get_data()
 df_casestudies
 
 
-wlcos = df_casestudies['WL Co']
+wlcos = df_casestudies['WL Co'].unique()
 st.write(type(wlcos))
 wlcos
-areas = df_casestudies["Area"].drop_duplicates()
+
+
+wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
+
+areas = df_casestudies["Area"].loc[df['WL Co'] == wlco_choices].unique()
+
 countries = df_casestudies['Country'].drop_duplicates()
 categories = df_casestudies['Category 1'].drop_duplicates()
 
 
-wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
+
 area_choices = st.sidebar.multiselect('Area:', areas)
 country_choices = st.sidebar.multiselect('Country:', countries)
 categories_choices = st.sidebar.multiselect('Categories:', categories)
@@ -45,7 +50,7 @@ if st.sidebar.button('Filter'):
 
 """
 
-areas = df["Area"].loc[df['WL Co'] == wlco_choices].drop_duplicates()
+
 
 country = df['Country'].loc[df['WL Co'] == wlco_choice].loc[df['Area'] == area_choice].drop_duplicates()
 
