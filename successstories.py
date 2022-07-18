@@ -5,6 +5,9 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 
+import PyPDF2
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
 
 @st.cache
 def get_data():
@@ -40,20 +43,12 @@ categories_choices
 
 if st.sidebar.button('Filter'):
           
-     df_casestudies.loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)]
+     filtered_df = df_casestudies.loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)]
+     filtered_df
+     pagenumbers = filtered_df['Page']
+     pagenumbers
 
 
-"""
-
-Filter works only downwards
 
 
-"""
 
-
-from rendermap import rendermap
-rendermap()
-
-map_data = pd.read_csv("./data/countries1.csv")
-map_data
-st.map(map_data)
