@@ -21,8 +21,6 @@ df_casestudies,df_jobhistory = get_data()
 
 df_casestudies
 
-
-
 wlcos = df_casestudies['WL Co'].unique()
 wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
 
