@@ -17,33 +17,13 @@ def get_data():
     return df_casestudies,df_jobhistory.set_index("Country")
 
 
-df_casestudies,df_jobhistory = get_data()
+def mergepdf(pagenumbers):
 
-df_casestudies
-
-wlcos = df_casestudies['WL Co'].unique()
-wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
-
-areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
-area_choices = st.sidebar.multiselect('Area:', areas)
-
-countries = df_casestudies['Country'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].unique()
-country_choices = st.sidebar.multiselect('Country:', countries)
-
-categories = df_casestudies['Category 1'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)].unique()
-categories_choices = st.sidebar.multiselect('Categories:', categories)
-
-cover_page = PdfFileReader("./data/PDFTemplates/Coverpage.pdf")
-#jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
-end_page = PdfFileReader("./data/PDFTemplates/Endpage.pdf")
-successstories = PdfFileReader("./data/PDFTemplates/Successstories.pdf")
-
-if st.sidebar.button('Filter'):
-    filtered_df = df_casestudies.loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)]
-    filtered_df
-    pagenumbers = filtered_df['Page']
-    
-
+    cover_page = PdfFileReader("./data/PDFTemplates/Coverpage_1.pdf")
+    #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
+    end_page = PdfFileReader("./data/PDFTemplates/Endpage.pdf")
+    successstories = PdfFileReader("./data/PDFTemplates/Successstories.pdf")
+        
     pdf_writer = PdfFileWriter()
 
     for page in range(cover_page.getNumPages()):
@@ -65,6 +45,35 @@ if st.sidebar.button('Filter'):
         pdf_writer.write(out)
 
     st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime='application/pdf')
+
+    return
+
+
+df_casestudies,df_jobhistory = get_data()
+
+df_casestudies
+
+wlcos = df_casestudies['WL Co'].unique()
+wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
+
+areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
+area_choices = st.sidebar.multiselect('Area:', areas)
+
+countries = df_casestudies['Country'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].unique()
+country_choices = st.sidebar.multiselect('Country:', countries)
+
+categories = df_casestudies['Category 1'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)].unique()
+categories_choices = st.sidebar.multiselect('Categories:', categories)
+
+
+
+if st.sidebar.button('Filter'):
+    filtered_df = df_casestudies.loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)]
+    filtered_df
+    pagenumbers = filtered_df['Page']
+    
+    mergepdf(pagenumbers)
+    
     
     data = df_jobhistory.loc[country_choices]
         #data /= 1000000.0
