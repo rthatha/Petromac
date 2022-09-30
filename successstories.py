@@ -19,10 +19,10 @@ def get_data():
 
 def mergepdf(pagenumbers):
 
-    cover_page = PdfFileReader("./data/PDFTemplates/Coverpage_1.pdf")
+    cover_page = PdfFileReader("./data/PDFTemplates/coverpage.pdf")
     #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
-    end_page = PdfFileReader("./data/PDFTemplates/Endpage.pdf")
-    successstories = PdfFileReader("./data/PDFTemplates/Successstories.pdf")
+    end_page = PdfFileReader("./data/PDFTemplates/endpage.pdf")
+    successstories = PdfFileReader("./data/PDFTemplates/SuccessStories.pdf")
         
     pdf_writer = PdfFileWriter()
 
