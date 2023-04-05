@@ -36,7 +36,7 @@ def mergepdf(success_storiespdf,pagenumbers):
     pdf_writer1 = PdfWriter()
 
     #for page in range(cover_page.getNumPages()):
-         pdf_writer.addPage(cover_page.getPage(page))
+         #pdf_writer.addPage(cover_page.getPage(page))
     
     for page in range(3):
          pdf_writer1.addPage(success_storiespdf.getPage(page))
