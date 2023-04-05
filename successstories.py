@@ -62,34 +62,35 @@ def export_report():
     with open("./data/Success_Stories.pdf", "rb") as pdf_file:
         PDFbyte = pdf_file.read()
 
-    st.download_button(label="Export_Report",
+    st.download_button(label="Export Report",
                        data=PDFbyte,
                        file_name="test.pdf",
                        mime='application/octet-stream')
 
 export_report()
+
 # nofilter / category / area / wlco / nocountry
 
 # stop filtering at every level
 
 
 
-wlcos = df_successstories['WL Co'].unique()
+wlcos = success_stories['WL Co'].unique()
 wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
 
-areas = df_successstories["Area"].loc[df_successstories['WL Co'].isin(wlco_choices)].unique()
+areas = success_stories["Area"].loc[success_stories['WL Co'].isin(wlco_choices)].unique()
 area_choices = st.sidebar.multiselect('Area:', areas)
 
-countries = df_successstories['Country'].loc[df_successstories['WL Co'].isin(wlco_choices)].loc[df_successstories['Area'].isin(area_choices)].unique()
+countries = success_stories['Country'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].unique()
 country_choices = st.sidebar.multiselect('Country:', countries)
 
-categories = df_successstories['Category 1'].loc[df_successstories['WL Co'].isin(wlco_choices)].loc[df_successstories['Area'].isin(area_choices)].loc[df_successstories['Country'].isin(country_choices)].unique()
+categories = success_stories['Category 1'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].loc[success_stories['Country'].isin(country_choices)].unique()
 categories_choices = st.sidebar.multiselect('Categories:', categories)
 
 
 
 if st.sidebar.button('Filter'):
-    filtered_df = df_successstories.loc[df_successstories['WL Co'].isin(wlco_choices)].loc[df_successstories['Area'].isin(area_choices)].loc[df_successstories['Country'].isin(country_choices)]
+    filtered_df = success_stories.loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].loc[success_stories['Country'].isin(country_choices)]
     filtered_df
     pagenumbers = filtered_df['Page']
     
@@ -97,7 +98,7 @@ if st.sidebar.button('Filter'):
     
     #filter for wlco / client / area / country / category
 
-    data = df_jobhistory.loc[country_choices]
+    data = jobhistory.loc[country_choices]
         #data /= 1000000.0
     st.write("Number of Descents", data.sort_index())
 
