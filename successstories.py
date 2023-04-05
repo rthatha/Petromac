@@ -63,7 +63,7 @@ def export_report():
         PDFbyte = pdf_file.read()
 
     st.download_button(label="Export_Report",
-                       data=PDFbyte.read(),
+                       data=PDFbyte,
                        file_name="test.pdf",
                        mime='application/octet-stream')
 
