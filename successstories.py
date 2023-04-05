@@ -1,30 +1,28 @@
-#from collections import namedtuple
-import altair as alt
-#import math
-import pandas as pd
-import streamlit as st
-#import numpy as np
 
+import streamlit as st
+import pandas as pd
+import altair as alt
+
+from pypdf import PdfReader,PdfWriter
 from pathlib import Path
 
-
-#import pypdf
-from pypdf import PdfReader,PdfWriter
+#from collections import namedtuple
+#import math
+#import numpy as np
 
 
 @st.cache_data
 def get_data():
 
-    df_successstories = pd.read_csv("./data/Summary.csv")
-    success_storiespdf = PdfReader("./data/PDFTemplates/Success_Stories.pdf")
-
     
-    df_jobhistory = pd.read_csv("./data/jobhistory.csv")
+    success_storiespdf = PdfReader("./data/Success_Stories.pdf")
+    success_stories = pd.read_csv("./data/Successes_Summary.csv")    
+    jobhistory = pd.read_csv("./data/jobhistory.csv")
     
-    return df_successstories, success_storiespdf,df_jobhistory.set_index("Country")
+    return success_stories, success_storiespdf,jobhistory.set_index("Country")
 
 
-def mergepdf(success_storiespdf,pagenumbers):
+def mergepdf(success_storiespdf,jobhistory_page,pagenumbers):
 
     
     #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
@@ -34,6 +32,8 @@ def mergepdf(success_storiespdf,pagenumbers):
     
     for page in range(3):
         pdf_writer.add_page(success_storiespdf.pages[page])
+
+    #pdf_writer.add_page(jobhistory_page)
 
     for page in pagenumbers:       
         pdf_writer.add_page(success_storiespdf.pages[page-1])
@@ -54,9 +54,16 @@ def mergepdf(success_storiespdf,pagenumbers):
     return
 
 
-df_successstories, success_storiespdf,df_jobhistory = get_data()
+success_stories, success_storiespdf,jobhistory = get_data()
 
-df_successstories
+success_stories #displays summary of success stories
+with open("dummy.pdf", "rb") as pdf_file:
+    PDFbyte = success_storiespdf.read()
+
+st.download_button(label="Export_Report",
+                    data=PDFbyte,
+                    file_name="test.pdf",
+                    mime='application/octet-stream')
 
 # nofilter / category / area / wlco / nocountry
 
