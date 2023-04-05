@@ -78,13 +78,16 @@ export_report()
 wlcos = success_stories['WL Co'].unique()
 wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
 
-areas = success_stories["Area"].loc[success_stories['WL Co'].isin(wlco_choices)].unique()
+#areas = success_stories["Area"].loc[success_stories['WL Co'].isin(wlco_choices)].unique()
+areas = success_stories["Area"].unique()
 area_choices = st.sidebar.multiselect('Area:', areas)
 
-countries = success_stories['Country'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].unique()
+#countries = success_stories['Country'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].unique()
+countries = success_stories['Country'].unique()
 country_choices = st.sidebar.multiselect('Country:', countries)
 
-categories = success_stories['Category 1'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].loc[success_stories['Country'].isin(country_choices)].unique()
+#categories = success_stories['Category 1'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].loc[success_stories['Country'].isin(country_choices)].unique()
+categories = success_stories['Category 1'].unique()
 categories_choices = st.sidebar.multiselect('Categories:', categories)
 
 
