@@ -57,7 +57,7 @@ success_stories, success_storiespdf,jobhistory = get_data()
 
 success_stories #displays summary of success stories
 
-@st.cache_resource
+
 def export_report():
     with open("./data/Success_Stories.pdf", "rb") as pdf_file:
         PDFbyte = pdf_file.read()
