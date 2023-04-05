@@ -57,7 +57,7 @@ success_stories, success_storiespdf,jobhistory = get_data()
 
 success_stories #displays summary of success stories
 with open(success_storiespdf, "rb") as pdf_file:
-    PDFbyte = success_storiespdf.read()
+    PDFbyte = pdf_file.read()
 
 st.download_button(label="Export_Report",
                     data=PDFbyte,
