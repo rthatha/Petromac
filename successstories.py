@@ -10,14 +10,19 @@ import PyPDF2
 from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 
 import pypdf
-from pypdf import PdfReader
+from pypdf import PdfReader,PdfWriter,PdfMerger
 
 
 @st.cache_data
 def get_data():
-    df_casestudies = pd.read_csv("./data/Summary.csv")
+
+    df_successstories = pd.read_csv("./data/Summary.csv")
+    successstories1 = PdfReader("./data/PDFTemplates/Success_Stories.pdf")
+
+    
     df_jobhistory = pd.read_csv("./data/jobhistory.csv")
-    return df_casestudies,df_jobhistory.set_index("Country")
+    
+    return df_successstories, successstories1,df_jobhistory.set_index("Country")
 
 
 def mergepdf(pagenumbers):
@@ -28,6 +33,7 @@ def mergepdf(pagenumbers):
     successstories = PdfFileReader("./data/PDFTemplates/SuccessStories.pdf")
         
     pdf_writer = PdfFileWriter()
+    pdf_writer1 = PdfWriter()
 
     for page in range(cover_page.getNumPages()):
             pdf_writer.addPage(cover_page.getPage(page))
@@ -52,26 +58,25 @@ def mergepdf(pagenumbers):
     return
 
 
-df_casestudies,df_jobhistory = get_data()
+df_successstories, successstories1,df_jobhistory = get_data()
 
-df_casestudies
+df_successstories
 
-wlcos = df_casestudies['WL Co'].unique()
+wlcos = df_successstories['WL Co'].unique()
 wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
 
-areas = df_casestudies["Area"].loc[df_casestudies['WL Co'].isin(wlco_choices)].unique()
+areas = df_successstories["Area"].loc[df_successstories['WL Co'].isin(wlco_choices)].unique()
 area_choices = st.sidebar.multiselect('Area:', areas)
 
-countries = df_casestudies['Country'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].unique()
+countries = df_successstories['Country'].loc[df_successstories['WL Co'].isin(wlco_choices)].loc[df_successstories['Area'].isin(area_choices)].unique()
 country_choices = st.sidebar.multiselect('Country:', countries)
 
-categories = df_casestudies['Category 1'].loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)].unique()
+categories = df_successstories['Category 1'].loc[df_successstories['WL Co'].isin(wlco_choices)].loc[df_successstories['Area'].isin(area_choices)].loc[df_successstories['Country'].isin(country_choices)].unique()
 categories_choices = st.sidebar.multiselect('Categories:', categories)
 
 
-
 if st.sidebar.button('Filter'):
-    filtered_df = df_casestudies.loc[df_casestudies['WL Co'].isin(wlco_choices)].loc[df_casestudies['Area'].isin(area_choices)].loc[df_casestudies['Country'].isin(country_choices)]
+    filtered_df = df_successstories.loc[df_successstories['WL Co'].isin(wlco_choices)].loc[df_successstories['Area'].isin(area_choices)].loc[df_successstories['Country'].isin(country_choices)]
     filtered_df
     pagenumbers = filtered_df['Page']
     
