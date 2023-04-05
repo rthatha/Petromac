@@ -17,15 +17,15 @@ from pypdf import PdfReader,PdfWriter,PdfMerger
 def get_data():
 
     df_successstories = pd.read_csv("./data/Summary.csv")
-    successstories1 = PdfReader("./data/PDFTemplates/Success_Stories.pdf")
+    success_storiespdf = PdfReader("./data/PDFTemplates/Success_Stories.pdf")
 
     
     df_jobhistory = pd.read_csv("./data/jobhistory.csv")
     
-    return df_successstories, successstories1,df_jobhistory.set_index("Country")
+    return df_successstories, success_storiespdf,df_jobhistory.set_index("Country")
 
 
-def mergepdf(successstoriespdf,pagenumbers):
+def mergepdf(success_storiespdf,pagenumbers):
 
     cover_page = PdfFileReader("./data/PDFTemplates/coverpage.pdf")
     #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
@@ -36,16 +36,16 @@ def mergepdf(successstoriespdf,pagenumbers):
     pdf_writer1 = PdfWriter()
 
     for page in range(cover_page.getNumPages()):
-            pdf_writer.addPage(cover_page.getPage(page))
+         pdf_writer.addPage(cover_page.getPage(page))
     
     for page in range(3):
-            pdf_writer1.addPage(successstoriespdf.getPage(page))
+         pdf_writer1.addPage(success_storiespdf.getPage(page))
 
     for page in pagenumbers:
         pdf_writer.addPage(successstories.getPage(page-1))
 
     for page in range(end_page.getNumPages()):
-            pdf_writer.addPage(end_page.getPage(page))
+        pdf_writer.addPage(end_page.getPage(page))
 
 
     # Make folder for storing user uploads
@@ -54,14 +54,14 @@ def mergepdf(successstoriespdf,pagenumbers):
     output_path = destination_folder / f"output_filtered_successstories.pdf"
 
     with open(str(output_path), 'wb') as out:
-        pdf_writer1.write(out)
+        pdf_writer.write(out)
 
     st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime='application/pdf')
 
     return
 
 
-df_successstories, successstoriespdf,df_jobhistory = get_data()
+df_successstories, success_storiespdf,df_jobhistory = get_data()
 
 df_successstories
 
@@ -84,7 +84,7 @@ if st.sidebar.button('Filter'):
     filtered_df
     pagenumbers = filtered_df['Page']
     
-    mergepdf(successstoriespdf,pagenumbers)
+    mergepdf(success_storiespdf,pagenumbers)
     
     
     data = df_jobhistory.loc[country_choices]
