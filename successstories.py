@@ -56,14 +56,18 @@ def mergepdf(success_storiespdf,jobhistory_page,pagenumbers):
 success_stories, success_storiespdf,jobhistory = get_data()
 
 success_stories #displays summary of success stories
-with open("./data/Success_Stories.pdf", "rb") as pdf_file:
-    PDFbyte = pdf_file.read()
 
-st.download_button(label="Export_Report",
-                    data=success_storiespdf.read(),
-                    file_name="test.pdf",
-                    mime='application/octet-stream')
+@st.cache_resource
+def export_report():
+    with open("./data/Success_Stories.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
 
+    st.download_button(label="Export_Report",
+                       data=PDFbyte.read(),
+                       file_name="test.pdf",
+                       mime='application/octet-stream')
+
+export_report()
 # nofilter / category / area / wlco / nocountry
 
 # stop filtering at every level
