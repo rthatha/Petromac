@@ -6,11 +6,10 @@ import streamlit as st
 import numpy as np
 
 from pathlib import Path
-import PyPDF2
-from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
+
 
 import pypdf
-from pypdf import PdfReader,PdfWriter,PdfMerger
+from pypdf import PdfReader,PdfWriter
 
 
 @st.cache_data
@@ -27,28 +26,19 @@ def get_data():
 
 def mergepdf(success_storiespdf,pagenumbers):
 
-    #cover_page = PdfFileReader("./data/PDFTemplates/coverpage.pdf")
+    
     #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
-    #end_page = PdfFileReader("./data/PDFTemplates/endpage.pdf")
-    #successstories = PdfFileReader("./data/PDFTemplates/SuccessStories.pdf")
+     
         
-    #pdf_writer = PdfFileWriter()
-    pdf_writer1 = PdfWriter()
-
-    #for page in range(cover_page.getNumPages()):
-         #pdf_writer.addPage(cover_page.getPage(page))
+    pdf_writer = PdfWriter()
     
     for page in range(3):
-         pdf_writer1.add_page(success_storiespdf.pages[page])
+        pdf_writer.add_page(success_storiespdf.pages[page])
 
-    for page in pagenumbers:
-        #pdf_writer.addPage(successstories.getPage(page-1))
-        pdf_writer1.add_page(success_storiespdf.pages[page-1])
+    for page in pagenumbers:       
+        pdf_writer.add_page(success_storiespdf.pages[page-1])
     
-    pdf_writer1.add_page(success_storiespdf.pages[-1])
-
-    #for page in range(end_page.getNumPages()):
-     #   pdf_writer.addPage(end_page.getPage(page))
+    pdf_writer.add_page(success_storiespdf.pages[-1])   
 
 
     # Make folder for storing user uploads
@@ -57,7 +47,7 @@ def mergepdf(success_storiespdf,pagenumbers):
     output_path = destination_folder / f"output_filtered_successstories.pdf"
 
     with open(str(output_path), 'wb') as out:
-        pdf_writer1.write(out)
+        pdf_writer.write(out)
 
     st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime='application/pdf')
 
@@ -67,6 +57,12 @@ def mergepdf(success_storiespdf,pagenumbers):
 df_successstories, success_storiespdf,df_jobhistory = get_data()
 
 df_successstories
+
+# nofilter / category / area / wlco / nocountry
+
+# stop filtering at every level
+
+
 
 wlcos = df_successstories['WL Co'].unique()
 wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
@@ -89,7 +85,8 @@ if st.sidebar.button('Filter'):
     
     mergepdf(success_storiespdf,pagenumbers)
     
-    
+    #filter for wlco / client / area / country / category
+
     data = df_jobhistory.loc[country_choices]
         #data /= 1000000.0
     st.write("Number of Descents", data.sort_index())
