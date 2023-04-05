@@ -1,14 +1,14 @@
-from collections import namedtuple
+#from collections import namedtuple
 import altair as alt
-import math
+#import math
 import pandas as pd
 import streamlit as st
-import numpy as np
+#import numpy as np
 
 from pathlib import Path
 
 
-import pypdf
+#import pypdf
 from pypdf import PdfReader,PdfWriter
 
 
