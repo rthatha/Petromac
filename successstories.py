@@ -13,7 +13,7 @@ import pypdf
 from pypdf import PdfReader
 
 
-@st.cache
+@st.cache_data
 def get_data():
     df_casestudies = pd.read_csv("./data/Summary.csv")
     df_jobhistory = pd.read_csv("./data/jobhistory.csv")
