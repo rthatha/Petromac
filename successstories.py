@@ -27,25 +27,28 @@ def get_data():
 
 def mergepdf(success_storiespdf,pagenumbers):
 
-    cover_page = PdfFileReader("./data/PDFTemplates/coverpage.pdf")
+    #cover_page = PdfFileReader("./data/PDFTemplates/coverpage.pdf")
     #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
-    end_page = PdfFileReader("./data/PDFTemplates/endpage.pdf")
-    successstories = PdfFileReader("./data/PDFTemplates/SuccessStories.pdf")
+    #end_page = PdfFileReader("./data/PDFTemplates/endpage.pdf")
+    #successstories = PdfFileReader("./data/PDFTemplates/SuccessStories.pdf")
         
-    pdf_writer = PdfFileWriter()
+    #pdf_writer = PdfFileWriter()
     pdf_writer1 = PdfWriter()
 
-    for page in range(cover_page.getNumPages()):
+    #for page in range(cover_page.getNumPages()):
          pdf_writer.addPage(cover_page.getPage(page))
     
     for page in range(3):
          pdf_writer1.addPage(success_storiespdf.getPage(page))
 
     for page in pagenumbers:
-        pdf_writer.addPage(successstories.getPage(page-1))
+        #pdf_writer.addPage(successstories.getPage(page-1))
+        pdf_writer1.addPage(success_storiespdf.getPage(page-1))
+    
+    pdf_writer1.addPage(success_storiespdf.getPage(-1))
 
-    for page in range(end_page.getNumPages()):
-        pdf_writer.addPage(end_page.getPage(page))
+    #for page in range(end_page.getNumPages()):
+     #   pdf_writer.addPage(end_page.getPage(page))
 
 
     # Make folder for storing user uploads
@@ -54,7 +57,7 @@ def mergepdf(success_storiespdf,pagenumbers):
     output_path = destination_folder / f"output_filtered_successstories.pdf"
 
     with open(str(output_path), 'wb') as out:
-        pdf_writer.write(out)
+        pdf_writer1.write(out)
 
     st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime='application/pdf')
 
