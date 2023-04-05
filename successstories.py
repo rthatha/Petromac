@@ -56,7 +56,7 @@ def mergepdf(success_storiespdf,jobhistory_page,pagenumbers):
 success_stories, success_storiespdf,jobhistory = get_data()
 
 success_stories #displays summary of success stories
-with open("dummy.pdf", "rb") as pdf_file:
+with open(success_storiespdf, "rb") as pdf_file:
     PDFbyte = success_storiespdf.read()
 
 st.download_button(label="Export_Report",
