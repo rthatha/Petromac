@@ -9,6 +9,9 @@ from pathlib import Path
 import PyPDF2
 from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 
+import pypdf
+from pypdf import PdfReader
+
 
 @st.cache
 def get_data():
