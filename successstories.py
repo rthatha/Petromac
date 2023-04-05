@@ -25,7 +25,7 @@ def get_data():
     return df_successstories, successstories1,df_jobhistory.set_index("Country")
 
 
-def mergepdf(pagenumbers):
+def mergepdf(successstoriespdf,pagenumbers):
 
     cover_page = PdfFileReader("./data/PDFTemplates/coverpage.pdf")
     #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
@@ -37,9 +37,12 @@ def mergepdf(pagenumbers):
 
     for page in range(cover_page.getNumPages()):
             pdf_writer.addPage(cover_page.getPage(page))
+    
+    for page in range(3):
+            pdf_writer1.addPage(cover_page.getPage(page))
 
     for page in pagenumbers:
-        pdf_writer.addPage(successstories.getPage(page-1))
+        pdf_writer.addPage(successstoriespdf.getPage(page-1))
 
     for page in range(end_page.getNumPages()):
             pdf_writer.addPage(end_page.getPage(page))
@@ -51,14 +54,14 @@ def mergepdf(pagenumbers):
     output_path = destination_folder / f"output_filtered_successstories.pdf"
 
     with open(str(output_path), 'wb') as out:
-        pdf_writer.write(out)
+        pdf_writer1.write(out)
 
     st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime='application/pdf')
 
     return
 
 
-df_successstories, successstories1,df_jobhistory = get_data()
+df_successstories, successstoriespdf,df_jobhistory = get_data()
 
 df_successstories
 
@@ -75,12 +78,13 @@ categories = df_successstories['Category 1'].loc[df_successstories['WL Co'].isin
 categories_choices = st.sidebar.multiselect('Categories:', categories)
 
 
+
 if st.sidebar.button('Filter'):
     filtered_df = df_successstories.loc[df_successstories['WL Co'].isin(wlco_choices)].loc[df_successstories['Area'].isin(area_choices)].loc[df_successstories['Country'].isin(country_choices)]
     filtered_df
     pagenumbers = filtered_df['Page']
     
-    mergepdf(pagenumbers)
+    mergepdf(successstoriespdf,pagenumbers)
     
     
     data = df_jobhistory.loc[country_choices]
