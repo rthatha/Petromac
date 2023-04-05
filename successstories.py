@@ -60,7 +60,7 @@ with open("./data/Success_Stories.pdf", "rb") as pdf_file:
     PDFbyte = pdf_file.read()
 
 st.download_button(label="Export_Report",
-                    data=PDFbyte,
+                    data=success_storiespdf,
                     file_name="test.pdf",
                     mime='application/octet-stream')
 
