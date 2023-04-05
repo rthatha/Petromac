@@ -13,9 +13,9 @@ from pathlib import Path
 
 @st.cache_data
 def get_data():
-    
+
     success_storiespdf = PdfReader("./data/Success_Stories.pdf")
-    success_stories = pd.read_csv("./data/Successes_Summary.csv")
+    success_stories = pd.read_csv("./data/Succeses_Summary.csv")
     jobhistory = pd.read_csv("./data/jobhistory.csv")
     
     return success_stories, success_storiespdf,jobhistory.set_index("Country")
