@@ -18,15 +18,15 @@ areas = success_stories["Area"].unique()
 countries = success_stories['Country'].unique()
 wlcos = success_stories['WL Co'].unique()
 
-st.session_state['categories'] = success_stories['Category 1'].unique()
+#st.session_state['categories'] = success_stories['Category 1'].unique()
 st.session_state['areas'] = success_stories["Area"].unique()
 st.session_state['countries'] = success_stories['Country'].unique()
 st.session_state['wlcos'] = success_stories['WL Co'].unique()
 
-def filter(categories):
-    st.write("hello")
+def filter():
+    st.session_state['categories']
 
-categories_choices = st.multiselect(label = 'Categories:', options = categories, on_change=filter(categories))
+st.session_state['categories'] = st.multiselect(label = 'Categories:', options = categories, on_change=filter())
 area_choices = st.multiselect('Area:', areas)
 country_choices = st.multiselect('Country:', countries)
 wlco_choices = st.multiselect('Wl Co:', wlcos)
