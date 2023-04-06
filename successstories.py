@@ -19,7 +19,7 @@ def get_data():
 
 def export_report(success_storiespdf,pages=[]):
     
-    pdf_writer = PdfWriter()
+    
     if pages == []:
         with open("./data/Success_Stories.pdf", "rb") as pdf_file:
             PDFbyte = pdf_file.read()
@@ -32,6 +32,8 @@ def export_report(success_storiespdf,pages=[]):
         return
     
     else:
+
+        pdf_writer = PdfWriter()
 
         for page in range(3):
             pdf_writer.add_page(success_storiespdf.pages[page])
@@ -65,6 +67,13 @@ categories = success_stories['Category 1'].unique()
 areas = success_stories["Area"].unique()
 countries = success_stories['Country'].unique()
 wlcos = success_stories['WL Co'].unique()
+
+st.session_state['categories'] = success_stories['Category 1'].unique()
+st.session_state['areas'] = success_stories["Area"].unique()
+st.session_state['countries'] = success_stories['Country'].unique()
+st.session_state['wlcos'] = success_stories['WL Co'].unique()
+
+st.session_state
 
 categories_choices = st.sidebar.multiselect('Categories:', categories)
 area_choices = st.sidebar.multiselect('Area:', areas)
