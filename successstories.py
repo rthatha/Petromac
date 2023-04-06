@@ -17,8 +17,7 @@ def get_data():
     return success_stories, success_storiespdf,jobhistory.set_index("Country")
 
 
-def export_report(success_storiespdf,pages=[]):
-    
+def export_report(success_storiespdf,pages=[]):    
     
     writer = PdfWriter()
     if pages == []:
@@ -34,10 +33,10 @@ def export_report(success_storiespdf,pages=[]):
         
         writer.add_page(success_storiespdf.pages[-1])   
         
-    output = open("Petromac_SuccessStories.pdf", "wb")
-    writer.write(output)
+    with open(f"Petromac_SuccessStories.pdf", "wb") as output:
+        writer.write(output)
     st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
-    #pdf_writer.close()
+    #writer.close()
     #output.close()
 
     return
