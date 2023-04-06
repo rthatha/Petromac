@@ -12,11 +12,11 @@ jobhistory.set_index("Country")
 
 st.write(success_stories) #displays summary of success stories
 
-export_report()
 
 
 
-#categories = success_stories['Category 1'].unique()
+
+categories = success_stories['Category 1'].unique()
 areas = success_stories["Area"].unique()
 countries = success_stories['Country'].unique()
 wlcos = success_stories['WL Co'].unique()
@@ -26,16 +26,13 @@ st.session_state['areas'] = success_stories["Area"].unique()
 st.session_state['countries'] = success_stories['Country'].unique()
 st.session_state['wlcos'] = success_stories['WL Co'].unique()
 
-st.session_state
-categories = st.session_state['categories']
-categories_choices = st.sidebar.multiselect('Categories:', st.session_state['categories'])
-st.session_state['categories']
 
-area_choices = st.sidebar.multiselect('Area:', areas)
-country_choices = st.sidebar.multiselect('Country:', countries)
-wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
+categories_choices = st.sidebar.multiselect('Categories:', categories)
+area_choices = st.multiselect('Area:', areas)
+country_choices = st.multiselect('Country:', countries)
+wlco_choices = st.multiselect('Wl Co:', wlcos)
 
-
+export_report()
 #categories = success_stories['Category 1'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].loc[success_stories['Country'].isin(country_choices)].unique()
 #areas = success_stories["Area"].loc[success_stories['WL Co'].isin(wlco_choices)].unique()
 #countries = success_stories['Country'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].unique()
