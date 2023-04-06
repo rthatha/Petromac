@@ -40,7 +40,7 @@ def export_report(pages=[]):
         PDFbyte = pdf_file.read()
         
     
-    #show_pdf(PDFbyte)
+    show_pdf(PDFbyte)
     st.download_button(label="Download PDF", 
                        data=PDFbyte,
                        file_name="Petromac_SuccessStories.pdf",
