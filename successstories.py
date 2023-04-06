@@ -25,7 +25,7 @@ def export_report(success_storiespdf,pages=[]):
          #   PDFbyte = pdf_file.read()
         
         st.download_button(label="Export Report",
-                           data=success_storiespdf,
+                           data="success_storiespdf",
                            file_name="Petromac_SuccessStories.pdf",
                            mime='application/octet-stream')
 
