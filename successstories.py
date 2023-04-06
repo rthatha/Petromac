@@ -6,10 +6,6 @@ import altair as alt
 from pypdf import PdfReader,PdfWriter
 from pathlib import Path
 
-#from collections import namedtuple
-#import math
-#import numpy as np
-
 
 @st.cache_data
 def get_data():
@@ -25,11 +21,11 @@ def export_report(success_storiespdf,pages=[]):
     
     pdf_writer = PdfWriter()
     if pages == []:
-        with open("success_storiespdf", "rb") as pdf_file:
-            PDFbyte = pdf_file.read()
+        #with open("success_storiespdf", "rb") as pdf_file:
+         #   PDFbyte = pdf_file.read()
         
         st.download_button(label="Export Report",
-                           data=PDFbyte,
+                           data=success_storiespdf,
                            file_name="Petromac_SuccessStories.pdf",
                            mime='application/octet-stream')
 
@@ -48,7 +44,9 @@ def export_report(success_storiespdf,pages=[]):
         output = open("Petromac_SuccessStories.pdf", "wb")
         pdf_writer.write(output)
         st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
-        
+        #pdf_writer.close()
+        #output.close()
+
         return
 
 
@@ -64,16 +62,13 @@ export_report(success_storiespdf)
 
 
 categories = success_stories['Category 1'].unique()
-
 areas = success_stories["Area"].unique()
 countries = success_stories['Country'].unique()
-
 wlcos = success_stories['WL Co'].unique()
 
 categories_choices = st.sidebar.multiselect('Categories:', categories)
 area_choices = st.sidebar.multiselect('Area:', areas)
 country_choices = st.sidebar.multiselect('Country:', countries)
-
 wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
 
 
@@ -88,7 +83,7 @@ if st.sidebar.button('Filter'):
     filtered_df
     pagenumbers = filtered_df['Page']
     
-    export_report(success_storiespdf,pagenumbers)
+    export_report(success_storiespdf,pages=pagenumbers)
     
     #filter for wlco / client / area / country / category
 
