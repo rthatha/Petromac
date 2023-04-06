@@ -28,11 +28,10 @@ def filter():
     st.session_state['categories']
 
 category_choices = st.multiselect(label ="Categories",
-                                  label_visibility="collapsed",
-                                  default = "Categories",                                  
-                                  options = categories, 
-                                  on_change=filter())
-
+                                  options = categories,
+                                  label_visibility="collapsed",                           
+                                  on_change=None)
+category_choices
 area_choices = st.multiselect('Area:', areas)
 country_choices = st.multiselect('Country:', countries)
 wlco_choices = st.multiselect('Wl Co:', wlcos)
