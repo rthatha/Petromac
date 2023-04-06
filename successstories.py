@@ -29,7 +29,7 @@ st.session_state['wlcos'] = success_stories['WL Co'].unique()
 def filter(categories):
     st.write(categories)
 
-categories_choices = st.multiselect(label = 'Categories:', options = categories, onchange=filter(categories))
+categories_choices = st.multiselect(label = 'Categories:', options = categories, on_change=filter(categories))
 area_choices = st.multiselect('Area:', areas)
 country_choices = st.multiselect('Country:', countries)
 wlco_choices = st.multiselect('Wl Co:', wlcos)
