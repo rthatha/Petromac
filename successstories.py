@@ -26,8 +26,10 @@ st.session_state['areas'] = success_stories["Area"].unique()
 st.session_state['countries'] = success_stories['Country'].unique()
 st.session_state['wlcos'] = success_stories['WL Co'].unique()
 
-
-categories_choices = st.multiselect('Categories:', categories)
+def filter(categories):
+    st.write(categories)
+    
+categories_choices = st.multiselect('Categories:', categories, onchange=filter(categories))
 area_choices = st.multiselect('Area:', areas)
 country_choices = st.multiselect('Country:', countries)
 wlco_choices = st.multiselect('Wl Co:', wlcos)
