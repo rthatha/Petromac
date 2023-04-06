@@ -25,7 +25,7 @@ def export_report(success_storiespdf,pages=[]):
     
     pdf_writer = PdfWriter()
     if pages == []:
-        with open(success_storiespdf, "rb") as pdf_file:
+        with open("success_storiespdf", "rb") as pdf_file:
             PDFbyte = pdf_file.read()
         
         st.download_button(label="Export Report",
