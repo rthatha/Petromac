@@ -30,7 +30,7 @@ def filter():
 
 category_choices = st.multiselect(label ="Categories",
                                   options = categories,                       
-                                  on_change=st.write(st.session_state)) )
+                                  on_change=st.write(st.session_state))
 
 
 
