@@ -13,9 +13,6 @@ jobhistory.set_index("Country")
 st.write(success_stories) #displays summary of success stories
 
 
-
-
-
 categories = success_stories['Category 1'].unique()
 areas = success_stories["Area"].unique()
 countries = success_stories['Country'].unique()
@@ -27,7 +24,7 @@ st.session_state['countries'] = success_stories['Country'].unique()
 st.session_state['wlcos'] = success_stories['WL Co'].unique()
 
 def filter(categories):
-    st.write(categories)
+    st.write("hello")
 
 categories_choices = st.multiselect(label = 'Categories:', options = categories, on_change=filter(categories))
 area_choices = st.multiselect('Area:', areas)
