@@ -33,8 +33,12 @@ def export_report(success_storiespdf,pages=[]):
         
         writer.add_page(success_storiespdf.pages[-1])   
         
-    with open(f"Petromac_SuccessStories.pdf", "wb") as output:
-        writer.write(output)
+    output = open("Petromac_SuccessStories.pdf", "wb")
+    writer.write(output)
+    writer.close()
+    output.close()
+
+
     st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
     #writer.close()
     #output.close()
