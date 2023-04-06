@@ -16,7 +16,7 @@ export_report()
 
 
 
-categories = success_stories['Category 1'].unique()
+#categories = success_stories['Category 1'].unique()
 areas = success_stories["Area"].unique()
 countries = success_stories['Country'].unique()
 wlcos = success_stories['WL Co'].unique()
@@ -28,7 +28,7 @@ st.session_state['wlcos'] = success_stories['WL Co'].unique()
 
 st.session_state
 categories = st.session_state['categories']
-categories_choices = st.sidebar.multiselect('Categories:', categories)
+categories_choices = st.sidebar.multiselect('Categories:', st.session_state['categories'])
 st.session_state['categories']
 
 area_choices = st.sidebar.multiselect('Area:', areas)
