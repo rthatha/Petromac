@@ -29,15 +29,15 @@ def export_report(pages=[]):
         
         writer.add_page(success_storiespdf.pages[-1])   
         
-    pdf_file = open("Petromac_SuccessStories.pdf", "wb")
-    writer.write(pdf_file)
+    output = open("Petromac_SuccessStories.pdf", "wb")
+    writer.write(output)
+    output.close()
     writer.close()
-    PDFbyte=pdf_file.read()
-    #pdf_file.close()
+   
+    
 
-    #with open("Petromac_SuccessStories.pdf", "rb") as pdf_file:
-        
-     #   PDFbyte = pdf_file.read()
+    with open("Petromac_SuccessStories.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
         
     
     #show_pdf(PDFbyte)
