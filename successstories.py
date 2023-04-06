@@ -26,14 +26,14 @@ def export_report(success_storiespdf,pages=[]):
     pdf_writer = PdfWriter()
     if pages == []:
 
-        output = open("success_storiespdf", "wb")
+        output = open(success_storiespdf, "wb")
         pdf_writer.write(output)
         st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
 
         return
     
     else:
-        
+
         for page in range(3):
             pdf_writer.add_page(success_storiespdf.pages[page])
         
