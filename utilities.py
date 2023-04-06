@@ -1,24 +1,21 @@
 import streamlit as st
 import pandas as pd
 from pypdf import PdfReader,PdfWriter
+import base64
 
 #from pathlib import Path
 
-@st.cache_data
-def get_data():
+def show_pdf(base64_pdf):
+    #with open(file_path,"rb") as f:
+    #   base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
+    st.markdown(pdf_display, unsafe_allow_html=True)
 
+def export_report(pages=[]):    
+    
     success_storiespdf = PdfReader("./data/Success_Stories.pdf")
-    success_stories = pd.read_csv("./data/Succeses_Summary.csv")
-    jobhistory = pd.read_csv("./data/jobhistory.csv")
-    
-    return success_stories, success_storiespdf,jobhistory.set_index("Country")
-
-
-
-
-def export_report(success_storiespdf,pages=[]):    
-    
     writer = PdfWriter()
+    
     if pages == []:
         for page in range(len(success_storiespdf.pages)):
             writer.add_page(success_storiespdf.pages[page])
@@ -38,9 +35,12 @@ def export_report(success_storiespdf,pages=[]):
     output.close()
 
     with open("Petromac_SuccessStories.pdf", "rb") as pdf_file:
+        
         PDFbyte = pdf_file.read()
-
-    st.download_button(label="Export Report", 
+        base64_pdf = base64.b64encode(PDFbyte).decode('utf-8')
+    
+    show_pdf(base64_pdf)
+    st.download_button(label="Download PDF", 
                        data=PDFbyte,
                        file_name="Petromac_SuccessStories.pdf",
                        mime='application/octet-stream')

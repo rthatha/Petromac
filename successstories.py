@@ -6,15 +6,13 @@ import altair as alt
 from utilities import get_data, export_report
 
 
+success_stories = pd.read_csv("./data/Succeses_Summary.csv")
+jobhistory = pd.read_csv("./data/jobhistory.csv")
+jobhistory.set_index("Country")
 
+st.write(success_stories) #displays summary of success stories
 
-
-success_stories, success_storiespdf,jobhistory = get_data()
-
-success_stories #displays summary of success stories
-
-export_report(success_storiespdf)
-
+export_report()
 
 
 
