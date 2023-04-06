@@ -21,11 +21,11 @@ def export_report(success_storiespdf,pages=[]):
     
     pdf_writer = PdfWriter()
     if pages == []:
-        #with open("success_storiespdf", "rb") as pdf_file:
-         #   PDFbyte = pdf_file.read()
+        with open("./data/Success_Stories.pdf", "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
         
         st.download_button(label="Export Report",
-                           data="./data/Success_Stories.pdf",
+                           data=PDFbyte,
                            file_name="Petromac_SuccessStories.pdf",
                            mime='application/octet-stream')
 
