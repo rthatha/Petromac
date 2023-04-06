@@ -27,7 +27,7 @@ st.session_state['countries'] = success_stories['Country'].unique()
 st.session_state['wlcos'] = success_stories['WL Co'].unique()
 
 st.session_state
-
+categories = st.session_state['categories']
 categories_choices = st.sidebar.multiselect('Categories:', categories)
 area_choices = st.sidebar.multiselect('Area:', areas)
 country_choices = st.sidebar.multiselect('Country:', countries)

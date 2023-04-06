@@ -41,8 +41,8 @@ def export_report(pages=[]):
         PDFbyte = pdf_file.read()
         base64_pdf = base64.b64encode(PDFbyte).decode('utf-8')
     
-    pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
-    st.markdown(pdf_display, unsafe_allow_html=True)
+    #pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
+    #st.markdown(pdf_display, unsafe_allow_html=True)
         
     
     #show_pdf()
