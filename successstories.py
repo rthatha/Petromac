@@ -21,74 +21,62 @@ def get_data():
     return success_stories, success_storiespdf,jobhistory.set_index("Country")
 
 
-def mergepdf(success_storiespdf,jobhistory_page,pagenumbers):
-
+def export_report(success_storiespdf,pages=[]):
     
-    #jobhistory_page = PdfFileReader("./data/PDFTemplates/Jobhistory_byfilter.pdf")
-     
-        
     pdf_writer = PdfWriter()
+    if pages == []:
+
+        output = open("success_storiespdf", "wb")
+        pdf_writer.write(output)
+        st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
+
+        return
     
-    for page in range(3):
-        pdf_writer.add_page(success_storiespdf.pages[page])
-
-    #pdf_writer.add_page(jobhistory_page)
-
-    for page in pagenumbers:       
-        pdf_writer.add_page(success_storiespdf.pages[page-1])
-    
-    pdf_writer.add_page(success_storiespdf.pages[-1])   
-
-
-    # Make folder for storing user uploads
-    destination_folder = Path('downloads')
-    destination_folder.mkdir(exist_ok=True, parents=True)
-    output_path = destination_folder / f"output_filtered_successstories.pdf"
-
-    with open(str(output_path), 'wb') as out:
-        pdf_writer.write(out)
-
-    st.download_button('Download Merged Document', output_path.read_bytes(), f"output_filtered_successstories.pdf", mime='application/pdf')
-
-    return
+    else:
+        
+        for page in range(3):
+            pdf_writer.add_page(success_storiespdf.pages[page])
+        
+        for page in pages:       
+            pdf_writer.add_page(success_storiespdf.pages[page-1])
+            
+        pdf_writer.add_page(success_storiespdf.pages[-1])   
+        
+        output = open("Petromac_SuccessStories.pdf", "wb")
+        pdf_writer.write(output)
+        st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
+        
+        return
 
 
 success_stories, success_storiespdf,jobhistory = get_data()
 
 success_stories #displays summary of success stories
 
-
-def export_report():
-    with open("./data/Success_Stories.pdf", "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-
-    st.download_button(label="Export Report",
-                       data=PDFbyte,
-                       file_name="test.pdf",
-                       mime='application/octet-stream')
-
-export_report()
+export_report(success_storiespdf)
 
 # nofilter / category / area / wlco / nocountry
 
 # stop filtering at every level
 
 
+categories = success_stories['Category 1'].unique()
+
+areas = success_stories["Area"].unique()
+countries = success_stories['Country'].unique()
 
 wlcos = success_stories['WL Co'].unique()
-wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
 
-#areas = success_stories["Area"].loc[success_stories['WL Co'].isin(wlco_choices)].unique()
-areas = success_stories["Area"].unique()
+categories_choices = st.sidebar.multiselect('Categories:', categories)
 area_choices = st.sidebar.multiselect('Area:', areas)
-
-#countries = success_stories['Country'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].unique()
-countries = success_stories['Country'].unique()
 country_choices = st.sidebar.multiselect('Country:', countries)
 
+wlco_choices = st.sidebar.multiselect('Wl Co:', wlcos)
+
+
 #categories = success_stories['Category 1'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].loc[success_stories['Country'].isin(country_choices)].unique()
-categories = success_stories['Category 1'].unique()
-categories_choices = st.sidebar.multiselect('Categories:', categories)
+#areas = success_stories["Area"].loc[success_stories['WL Co'].isin(wlco_choices)].unique()
+#countries = success_stories['Country'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].unique()
 
 
 
@@ -97,7 +85,7 @@ if st.sidebar.button('Filter'):
     filtered_df
     pagenumbers = filtered_df['Page']
     
-    mergepdf(success_storiespdf,pagenumbers)
+    export_report(success_storiespdf,pagenumbers)
     
     #filter for wlco / client / area / country / category
 
