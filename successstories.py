@@ -32,7 +32,7 @@ category_choices = st.multiselect(label ="Categories",
                                   options = categories,                       
                                   on_change=None)
 
-st.session_state
+
 
 area_choices = st.multiselect('Area:', areas)
 country_choices = st.multiselect('Country:', countries)
@@ -43,7 +43,7 @@ export_report()
 #areas = success_stories["Area"].loc[success_stories['WL Co'].isin(wlco_choices)].unique()
 #countries = success_stories['Country'].loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].unique()
 
-
+st.session_state
 
 if st.button('Filter'):
     filtered_df = success_stories.loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].loc[success_stories['Country'].isin(country_choices)]
