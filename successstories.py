@@ -38,8 +38,15 @@ def export_report(success_storiespdf,pages=[]):
     writer.close()
     output.close()
 
+    with open("Petromac_SuccessStories.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
 
-    st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
+    st.download_button(label="Export Report", 
+                       data=PDFbyte,
+                       file_name="Petromac_SuccessStories.pdf",
+                       mime='application/octet-stream')
+
+    #st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
     #writer.close()
     #output.close()
 
