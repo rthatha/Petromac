@@ -20,36 +20,27 @@ def get_data():
 def export_report(success_storiespdf,pages=[]):
     
     
+    writer = PdfWriter()
     if pages == []:
-        with open("./data/Success_Stories.pdf", "rb") as pdf_file:
-            PDFbyte = pdf_file.read()
-        
-        st.download_button(label="Export Report",
-                           data=PDFbyte,
-                           file_name="Petromac_SuccessStories.pdf",
-                           mime='application/octet-stream')
-
-        return
-    
-    else:
-
-        pdf_writer = PdfWriter()
-
-        for page in range(3):
-            pdf_writer.add_page(success_storiespdf.pages[page])
-        
-        for page in pages:       
-            pdf_writer.add_page(success_storiespdf.pages[page-1])
+        for page in range(len(success_storiespdf.getnumpages())):
+            writer.add_page(success_storiespdf.pages[page])
             
-        pdf_writer.add_page(success_storiespdf.pages[-1])   
+    else:
+        for page in range(3):
+            writer.add_page(success_storiespdf.pages[page])     
+    
+        for page in pages:
+            writer.add_page(success_storiespdf.pages[page])
         
-        output = open("Petromac_SuccessStories.pdf", "wb")
-        pdf_writer.write(output)
-        st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
-        #pdf_writer.close()
-        #output.close()
+        writer.add_page(success_storiespdf.pages[-1])   
+        
+    output = open("Petromac_SuccessStories.pdf", "wb")
+    writer.write(output)
+    st.download_button('Export Report', output.read_bytes(), f"Petromac_SuccessStories.pdf", mime='application/pdf')
+    #pdf_writer.close()
+    #output.close()
 
-        return
+    return
 
 
 success_stories, success_storiespdf,jobhistory = get_data()
@@ -58,9 +49,7 @@ success_stories #displays summary of success stories
 
 export_report(success_storiespdf)
 
-# nofilter / category / area / wlco / nocountry
 
-# stop filtering at every level
 
 
 categories = success_stories['Category 1'].unique()
