@@ -5,7 +5,7 @@ import base64
 
 #from pathlib import Path
 
-def show_pdf(PDFbyte):
+def show_pdf():
     with open("Petromac_SuccessStories.pdf", "rb") as f:
         base64_pdf = base64.b64encode(f.read()).decode('utf-8')
     
@@ -39,9 +39,14 @@ def export_report(pages=[]):
 
     with open("Petromac_SuccessStories.pdf", "rb") as pdf_file:
         PDFbyte = pdf_file.read()
+
+    base64_pdf = base64.b64encode(PDFbyte).decode('utf-8')
+    
+    pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
+    st.markdown(pdf_display, unsafe_allow_html=True)
         
     
-    show_pdf(PDFbyte)
+    #show_pdf()
     st.download_button(label="Download PDF", 
                        data=PDFbyte,
                        file_name="Petromac_SuccessStories.pdf",
