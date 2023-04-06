@@ -29,7 +29,7 @@ def filter():
 
 category_choices = st.multiselect(label ="Categories",
                                   options = categories,
-                                  label_visibility="collapsed",                           
+                                  label_visibility= None,                           
                                   on_change=None)
 category_choices
 area_choices = st.multiselect('Area:', areas)
