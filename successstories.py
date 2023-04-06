@@ -27,7 +27,7 @@ st.session_state['countries'] = success_stories['Country'].unique()
 st.session_state['wlcos'] = success_stories['WL Co'].unique()
 
 
-categories_choices = st.sidebar.multiselect('Categories:', categories)
+categories_choices = st.multiselect('Categories:', categories)
 area_choices = st.multiselect('Area:', areas)
 country_choices = st.multiselect('Country:', countries)
 wlco_choices = st.multiselect('Wl Co:', wlcos)
@@ -39,12 +39,12 @@ export_report()
 
 
 
-if st.sidebar.button('Filter'):
+if st.button('Filter'):
     filtered_df = success_stories.loc[success_stories['WL Co'].isin(wlco_choices)].loc[success_stories['Area'].isin(area_choices)].loc[success_stories['Country'].isin(country_choices)]
     filtered_df
     pagenumbers = filtered_df['Page']
     
-    export_report(success_storiespdf,pages=pagenumbers)
+    export_report(pages=pagenumbers)
     
     #filter for wlco / client / area / country / category
 
