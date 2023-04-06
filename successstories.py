@@ -25,13 +25,15 @@ st.session_state['wlcos'] = success_stories['WL Co'].unique()
 
 def filter():
     st.write("Filtering")
-    st.session_state['categories']
+    filtered_df = success_stories.loc[success_stories['Category 1'].isin(category_choices)]
+    filtered_df
 
 category_choices = st.multiselect(label ="Categories",
-                                  options = categories,
-                                  label_visibility= None,                           
-                                  on_change=None)
-category_choices
+                                  options = categories,                       
+                                  on_change=filter())
+
+
+
 area_choices = st.multiselect('Area:', areas)
 country_choices = st.multiselect('Country:', countries)
 wlco_choices = st.multiselect('Wl Co:', wlcos)
