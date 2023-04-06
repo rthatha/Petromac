@@ -22,7 +22,7 @@ def export_report(success_storiespdf,pages=[]):
     
     writer = PdfWriter()
     if pages == []:
-        for page in range(len(success_storiespdf.getnumpages())):
+        for page in range(len(success_storiespdf.pages)):
             writer.add_page(success_storiespdf.pages[page])
             
     else:
