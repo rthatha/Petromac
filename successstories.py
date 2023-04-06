@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
-from utilities import get_data, export_report
+from utilities import export_report
 
 
 success_stories = pd.read_csv("./data/Succeses_Summary.csv")
